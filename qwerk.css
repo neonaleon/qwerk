@@ -1,0 +1,68 @@
+/* CSS declarations go here */
+html { -webkit-text-size-adjust: none; }
+
+body {
+  overflow: hidden;
+}
+
+/*#mainLayout {
+  margin: 0px 10px;
+}*/
+
+/*textarea {
+  margin: 0em;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  text-align: left;
+  line-height: 1.2142em;
+  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  padding: 0.67861em 1em;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: rgba(0, 0, 0, 0.8);
+  border-radius: 0.2857rem;
+  -webkit-transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow: none;
+}
+
+#chatInput textarea {
+  resize: none;
+}*/
+
+/* businessInformation */
+#mainLayout .four.wide.column {
+  padding: 10px 0px;
+}
+
+#main {
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: overlay;
+}
+
+#chatFeed {
+  margin: 0px;
+}
+
+#chatFeed img.emoji {
+  max-width: 1.4em;
+}
+
+#chatFeed div.event[transition="fade"].out {
+  opacity: 0;
+}
+
+#chatFeed div.event[transition="fade"] {
+  opacity: 1;
+  transition: opacity 250ms ease;
+}
+
+#chatInput {
+  position: relative;
+  padding: 10px 0px;
+}

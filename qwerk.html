@@ -1,0 +1,170 @@
+<head>
+  <title>qwerk</title>
+</head>
+
+<template name="mainLayout">
+  <div class="ui fluid page grid" id="mainLayout">
+    <div class="row">
+      <div class="four wide column">
+          {{> Template.dynamic template=left}}
+      </div>
+      <div class="eight wide column">
+        <div id="main">
+          {{> Template.dynamic template=middle}}
+        </div>
+        {{> chatInput}}
+      </div>
+      <div class="four wide column">
+        {{> Template.dynamic template=right}}
+      </div>
+    </div>
+  </div>
+  {{> checkInModal}}
+</template>
+
+<template name="mobileLayout">
+  <div class="ui fluid page grid">
+    <div class="row">
+      <div class="column">
+        <div id="main">
+          {{> Template.dynamic template=middle}}
+        </div>
+        {{> chatInput}}
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="leftColumn">
+  {{> businessInformation}}
+</template>
+
+<template name="middleColumn">
+  {{> chatFeed}}
+</template>
+
+<template name="rightColumn">
+  {{#if currentUser}}
+    {{> atNavButton}}
+    <h1>{{_ "You"}}</h1>
+    {{#with currentUser}}
+      {{> currentUserInformation}}
+      {{> currentUserActionButtons}}
+    {{/with}}
+    <div class="ui divider"></div>
+  {{/if}}
+  <h1>{{_ "Users"}}</h1>
+  {{> userList}}
+</template>
+
+<template name="userList">
+  <div id="userList" class="ui celled link list">
+    {{#each users}}
+      {{> userInformation}}
+    {{/each}}
+  </div>
+</template>
+
+<template name="businessInformation">
+  {{#with data}}
+    {{#if logo}}
+      <img src="{{logo.url}}" alt="" class="ui image" id="logo">
+    {{/if}}
+    {{#markdown}}{{info}}{{/markdown}}
+  {{/with}}
+</template>
+
+<template name="checkInButton">
+  <button class="ui green fluid checkin button">{{_ "Check In"}}</button>
+</template>
+
+<template name="currentUserInformation">
+  <div id="currentUserInformation" class="ui celled link list">
+    {{> userInformation}}
+  </div>
+</template>
+
+<template name="currentUserActionButtons">
+  <div class="three tiny fluid ui buttons">
+    <div class="ui positive button" id="free">FREE</div>
+    <div class="ui yellow button" id="busy">BUSY</div>
+    <div class="ui negative button" id="dnd">DND</div>
+  </div>
+</template>
+
+<template name="userInformation">
+  <a class="item">
+    <i class="{{statusColor status}} user icon"></i>
+    <div class="middle aligned content">
+      <div class="header">{{name}}</div>
+    </div>
+  </a>
+</template>
+
+<template name="chatFeed">
+  <div class="ui feed" id="chatFeed">
+    {{#each messages}}
+      {{> chatMessage}}
+    {{/each}}
+  </div>
+</template>
+
+<template name="chatMessage">
+  {{!-- TODO: Add avatar and threading --}}
+  <div class="event" transition="fade">
+    {{!-- <div class="label">
+      <img src="{{image}}" alt="">
+    </div> --}}
+    <div class="content">
+      <div class="summary">
+        <a href="/" class="user">{{formatChatUser createdBy}}</a>
+        <div class="date">{{formatChatTimestamp createdAt}}</div>
+      </div>
+      <div class="description">
+        {{{formatChatMessage message}}}
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="chatInput">
+  {{#if currentUser}}
+    <div id="chatInput" class="ui fluid input">
+      <input type="text" placeholder="Message...">
+    </div>
+    {{!-- <div id="chatInput" class="ui fluid input">
+      <textarea rows="1" placeholder="Message..."></textarea>
+    </div> --}}
+  {{else}}
+    <div id="chatInput">
+      {{> checkInButton}}
+    </div>
+  {{/if}}
+</template>
+
+<template name="checkInModal">
+  <div class="ui checkin modal">
+    <i class="close icon"></i>
+    <div class="header">{{_ "Sign In"}}</div>
+    <div class="content">
+      <div class="ui fluid grid">
+        <div class="one column row">
+          {{!-- <div class="column">{{> headshotPreview}}</div> --}}
+          <div class="column">
+            {{#unless currentUser}}
+              {{> atForm}}
+            {{/unless}}
+          </div>
+        </div>
+      </div>
+    </div>
+    {{!-- <div class="actions">
+      <div class="ui negative cancel button">
+        Cancel
+      </div>
+      <div class="ui positive right labeled icon checkin button">
+        Check In <i class="checkmark icon"></i>
+      </div>
+    </div> --}}
+  </div>
+</template>

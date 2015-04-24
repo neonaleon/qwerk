@@ -1,0 +1,98 @@
+<template name="adminLayout">
+  <div class="ui fluid page grid" id="adminLayout">
+    {{> Template.dynamic template=middle}}
+  </div>
+</template>
+
+<template name="adminMain">
+  {{#if currentUser}}
+  <div class="row">
+    <div class="column">
+      <div class="ui fluid segment">
+        <h4 class="ui dividing header">
+          {{_ "Edit Business Info"}}
+        </h4>
+        {{> editBusinessInfo}}
+      </div>
+    </div>
+  </div>
+  {{else}}
+    {{> adminLogin}}
+  {{/if}}
+</template>
+
+<template name="adminSetup">
+  {{> installer}}
+</template>
+
+<template name="adminNotAuthorized">
+  <div class="row">
+    <div class="column">
+      <div class="ui fluid message">{{_ "You are not authorized to view this page."}}</div>
+    </div>
+  </div>
+  {{#unless currentUser}}
+    {{> adminLogin}}
+  {{/unless}}
+</template>
+
+<template name="adminLogin">
+  <div class="row">
+    <div class="column">
+      {{> atForm state="signIn"}}
+    </div>
+  </div>
+</template>
+
+<!-- extending AccountsTemplates -->
+
+<template name="qwerk_atPwdForm">
+  <div class="at-pwd-form">
+    <form id="at-pwd-form" action="#" method="POST" novalidate>
+      <!-- Moved the iteration to appAtGroupFields -->
+      {{> qwerk_atGroupFields}}
+
+      {{#if showForgotPasswordLink}}
+        {{> atPwdLink}}
+      {{/if}}
+
+      {{> atPwdFormBtn}}
+    </form>
+  </div>
+</template>
+
+<template name="qwerk_atGroupFields">
+  {{#each fields}}
+    <!-- Collect grouped fields, possibly outputting nothing until the group is ended -->
+    {{#with collectFields this}}
+      {{#if isArray this}}
+        <!-- Group container -->
+        <div class="{{numberToWord this.length}} fields">
+          {{#each this}}
+            {{> atInput}}
+          {{/each}}
+        </div>
+      {{else}}
+        {{> atInput}}
+      {{/if}}
+    {{/with}}
+  {{/each}}
+</template>
+
+<!-- AutoForm -->
+
+<template name="insertBusinessInfo">
+  {{#autoForm collection="BusinessInfo" id="insertBusinessInfoForm" type="insert"}}
+    {{> afQuickField name="logo" label="" remove-label=""}}
+    {{> afQuickField name="info" rows=6}}
+    <button type="submit" class="ui primary button">Update</button>
+  {{/autoForm}}
+</template>
+
+<template name="editBusinessInfo">
+  {{#autoForm collection="BusinessInfo" id="updateBusinessInfoForm" type="update" doc=data}}
+    {{> afQuickField name="logo" label="" remove-label=""}}
+    {{> afQuickField name="info" rows=6}}
+    <button type="submit" class="ui {{loading}} primary button">Update</button>
+  {{/autoForm}}
+</template>

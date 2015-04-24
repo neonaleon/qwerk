@@ -1,0 +1,36 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-platform
+autopublish
+mdg:camera
+msavin:mongol
+semantic:ui-css
+meteorhacks:flow-layout
+meteorhacks:flow-router
+meteorhacks:fast-render
+u2622:persistent-session
+fds:keycodes
+markdown
+accounts-password
+alanning:roles
+zimme:collection-timestampable
+service-configuration
+momentjs:moment
+useraccounts:semantic-ui
+dburles:collection-helpers
+seriousm:emoji-continued
+cfs:standard-packages
+cfs:gridfs
+tap:i18n
+softwarerero:accounts-t9n
+qwerk-installer
+aldeed:template-extension
+jameslefrere:autoform-semantic-ui
+aldeed:simple-schema
+aldeed:collection2
+aldeed:autoform
+yogiben:autoform-file
